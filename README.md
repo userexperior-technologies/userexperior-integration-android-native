@@ -5,6 +5,7 @@
 ## A. Integration
 
  1. **Add UserExperior dependency in build.gradle of your app**
+	
 	Note:  If UserExperior is already integrated in your project, just re-sync the 		project with gradle.
 	
 	    implementation 'com.userexperior:userexperior-android:+'
@@ -12,6 +13,7 @@
  2. **Start UserExperior SDK**
 
 	    UserExperior.startRecording(getApplicationContext(), "your-version-key-here");
+	
 	Note: Call above method in every activity that is an entry point to your app! (Entry activities are usually those which have a custom <intent-filter> element in the AndroidManifest.xml file. e.g. MainActivity, Deep Linking Activity, etc.)
 
 - Note:
