@@ -37,6 +37,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 	UserExperior SDK by  default takes device id as user identifier. However, you can specify any unique user identifier of your choice (eg. Email Id, Phone Number, etc.) as custom user identifier. This identifier will show up in UserExperior portal.
 
 		void setUserIdentifier(String userIdentifier)
+	
 	Note: Max `userIdentifier` limit is 250 chars only
 
 	Code Example:
@@ -48,6 +49,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 	UserExperior SDK lets you track user events, app responses/messages of your app and tag sessions based on some conditions using very powerful API called setCustomTag.
 
 		void setCustomTag(String customTag, String customType)
+	
 	Note: Max `customTag` limit is 250 chars only
 
 	Using this API, you can add:
@@ -126,6 +128,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 	UserExperior SDK automatically detects Activities and defines them as screens. However, If you have used fragments or anything else to represent your screens, then we recommend to use the "startScreen API". This API allows you to manually define screens.
 
 		void startScreen(String screenName)
+	
 	Note: Max `screenName` limit is 250 chars only
 
 	Code Example:
@@ -135,6 +138,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 		} catch (Exception e) {  
 			e.printStackTrace();  
 		}	
+	
 	Note:  This method should be usually called from the onResume() method.
 
 5. **Track Response Time of Methods/API Calls**
@@ -143,6 +147,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 
 		void startTimer(String timerName)
 		void endTimer(String timerName)
+	
 	Note: Max `timerName` limit is 250 chars only
 
 	e.g. Suppose, you have a ListView on your screen which gets loaded with data you receive  from the server. You can call startTimer API when screen resumes to the user and call stopTimer API when data gets successfully shown in the ListView. Now you can know how much time it takes to load data after screen is visible to the user. Similarly, you can use startTimer at any API call and endTimer on API response.
@@ -168,12 +173,15 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 	UserExperior SDK has following APIs which can be used to control the recording. The APIs stopRecording, pauseRecording, resumeRecording are optional and they should be only called when you explicitly want to override the default behavior. Basically, you can use pauseRecording and resumeRecording to bypass any user flow which you don’t want UserExperior to capture.
 
 		void stopRecording()
+	
 	By default, recording stops automatically once the app goes to background. However, you can stop at desired point by calling this API.
 
 		void pauseRecording()	
+	
 	This API pauses the recording, you can use resumeRecording API to resume.
 
 		void resumeRecording()
+	
 	This API resumes the recording if it is paused.
 
 7. **Get Precise User Location**
@@ -196,6 +204,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 	UserExperior SDK lets you send handled exceptions and their information to UserExperior Dashboard so that you can know where your app caused the handled exceptions. You must send exceptions in the catch block(s) of the handled exception. The exception object’s class name (eg. java.lang.NullPointerException) will appear in the story line of the sessions of your app on the dashboard.
 
 		void sendException(Throwable exceptionObj, String exceptionTag)
+	
 	Note: Max `exceptionTag` limit is 250 chars only
 	
 	Code Example:
@@ -232,33 +241,43 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 ## C. FAQs
 
 **When can we see the videos of the user’s session?**
+
 When the app is minimised to the background then UserExperior SDK processes the session captured and send the information to UserExperior server.
 
 **How long does it take for the video session to appear on the dashboard?**
+
 From the time the app is minimised to the background the session captured will take 5 to 7 minutes to be reflected on UserExperior dashboard.
 
 **Will the session upload if I kill the app?**
+
 If the app is killed without minimising the app to the background, then the session which was killed will not get uploaded. UserExperior will be able to send the data whenever the app is minimised to the background.
 
 **What if the user does not have network on the mobile device? Will the video get captured?**
+
 If the user does not have an active internet on their device at the time of start of session or during the end while uploading, then UserExperior stores the session locally in the apps secure memory. This stored session is sent to the UserExperior server when the users access the app again with an active internet.
 
 **Does UserExperior Track events?**
+
 Yes, By default UserExperior tracks native events. But if you want to track events done on custom controls you can track these events by calling a Customtag event.
 
 **Can I add my own custom event, like we do for other SDK’s?**
+
 Yes you can add custom events using Customtag API.
 
 **Can I uniquely identify users session on the dashboard?**
+
 Yes, use SetUserIdentifier API.
 
 **We use fragments in our app, does UserExperior also detect fragments?**
+
 Yes, user StartScreen API for fragments. This will allow UserExperior to recognise fragment as a screen.
 
 **Can UserExperior also work on Cordova/Phone gap kind of frameworks?**
+
 Yes
 
 **I am getting a crash which has the following UserExperior entry in the trace `com.userexperior.*.dispatchTouchEvent` ?**
+
 UserExperior intercepts and log every touch gesture that is occurring within the app, then dispatch it back to the original implementation. The DispatchTouchEvent/ DispatchkeyEvent class is the class that is responsible for this behaviour. The reason you see UserExperior in the stack-trace is that the UserExperior SDK was active (had a running thread) during the crash, but it did not cause the app to crash.
 
 You can see the full list of Android methods that could be in the stack-trace here: https://developer.android.com/reference/android/view/Window.Callback.html
